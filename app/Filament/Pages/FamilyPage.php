@@ -16,6 +16,7 @@ class FamilyPage extends Page
     protected static string $view = 'filament.pages.family-page';
     protected ?string $heading='';
     protected static ?string $navigationLabel='العائلات';
+    protected static ?int $navigationSort=9;
     public $showFamilyWidget=false;
 
 

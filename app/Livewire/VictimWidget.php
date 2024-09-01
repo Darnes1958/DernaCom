@@ -10,6 +10,7 @@ use App\Models\Mafkoden;
 use App\Models\VicTalent;
 use App\Models\Victim;
 use Filament\Actions\StaticAction;
+use Filament\Forms\Components\FileUpload;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Enums\FontWeight;
@@ -48,6 +49,8 @@ class VictimWidget extends BaseWidget
             ->heading(new HtmlString('<div class="text-primary-400 text-lg"> </div>'))
             ->defaultPaginationPageOption(10)
             ->striped()
+            ->emptyStateHeading('قم باختيار العائلة من القائمة')
+            ->emptyStateIcon('heroicon-o-arrow-long-right')
             ->columns([
                 TextColumn::make('FullName')
                     ->label('الاسم بالكامل')
@@ -60,6 +63,20 @@ class VictimWidget extends BaseWidget
                     ))
                     ->searchable(),
                 ImageColumn::make('image2')
+                    ->action(
+                        Action::make('Upload')
+                            ->fillForm(function (Victim $record) {
+                                return ['image2'=>$record->image2];
+                            })
+                            ->form([
+                                FileUpload::make('image2')
+                                    ->multiple()
+                                    ->directory('form-attachments'),
+                            ])
+                            ->action(function (array $data,Victim $record,){
+                                $record->update(['image2'=>$data['image2'], ]);
+                            })
+                    )
                     ->toggleable()
                     ->stacked()
                     ->label('')
