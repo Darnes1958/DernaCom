@@ -257,62 +257,12 @@ class InfoPage extends Page implements HasTable,HasForms
                     ->toggleable()
                     ->sortable()
                     ->searchable(),
-                IconColumn::make('inWork')
-                    ->label('فالعمل')
-                    ->color(function ($state){
-                        if ($state) return 'Fuchsia'; else return 'yellow';
-                    })
-                    ->action(
-                        Action::make('inwork')
-                            ->action(function (Victim $record,){
-                                if ($record->inWork)  $record->update(['inWork'=>false]);
-                                else  $record->update(['inWork'=>true]);
-                            })
-                    )
-                    ->visible(Auth::id()==1)
-                    ->boolean(),
-                IconColumn::make('inSave')
-                    ->label('فالانقاذ')
-                    ->color(function ($state){
-                        if ($state) return 'Fuchsia'; else return 'yellow';
-                    })
-                    ->action(
-                        Action::make('insave')
-                            ->action(function (Victim $record,){
-                                if ($record->inSave)  $record->update(['inSave'=>false]);
-                                else  $record->update(['inSave'=>true]);
-                            })
-                    )
-                    ->visible(Auth::id()==1)
-                    ->boolean(),
-                IconColumn::make('guests')
-                    ->label('ضيوف')
-                    ->color(function ($state){
-                        if ($state) return 'Fuchsia'; else return 'yellow';
-                    })
-                    ->action(
-                        Action::make('Guests')
-                            ->action(function (Victim $record,){
-                                if ($record->guests)  $record->update(['guests'=>false]);
-                                else  $record->update(['guests'=>true]);
-                            })
-                    )
-                    ->visible(Auth::id()==1)
-                    ->boolean(),
+
+
+
                 ImageColumn::make('image')
                     ->toggleable()
-                    ->placeholder('الصورة')
-                    ->tooltip('اضغط للإدخال او التعديل')
-                    ->action(
-                        Action::make('Upload')
-                            ->form([
-                                FileUpload::make('image')
-                                    ->directory('form-attachments'),
-                            ])
-                            ->action(function (array $data,Victim $record,){
-                                $record->update(['image'=>$data['image'], ]);
-                            })
-                    )
+
                     ->label('')
                     ->circular(),
 

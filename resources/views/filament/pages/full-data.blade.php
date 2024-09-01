@@ -18,7 +18,7 @@
     @endif
     @if($record->husband)
         <p style="color: #00bb00;font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;زوجته :&nbsp;</p>
-        <p >{{$record->husband->FullName}}&nbsp;({{$record->husband->Family->FamName}})</p>
+        <p >{{$record->husband->FullName}}</p>
     @endif
     @if($record->sonOfFather)
         @if($record->male=='ذكر')
